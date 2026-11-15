@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fffaf5">
+  <title>PawVision — Cat or Dog?</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="PawVision home">
+        <span class="brand-mark">🐾</span>
+        <span>Paw<span>Vision</span></span>
+      </a>
+      <span class="top-note"><span class="status-dot"></span> AI image classifier</span>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow"><span>✦</span> A little bit of AI, a lot of paws</div>
+      <h1>Is it a <span class="word-cat">cat</span> or a <span class="word-dog">dog</span>?</h1>
+      <p>Drop in a photo and let our AI take a look. Your furry mystery is just one click away.</p>
+      <div class="pet-doodles" aria-hidden="true">
+        <span class="doodle cat-doodle">🐱</span>
+        <span class="doodle sparkle">✦</span>
+        <span class="doodle dog-doodle">🐶</span>
+      </div>
+    </section>
+
+    <section class="classifier-card" aria-label="Image classifier">
+      <div class="card-heading">
+        <div>
+          <h2>Meet your mystery pet</h2>
+          <p>Choose an image to get started</p>
+        </div>
+        <span class="step-pill">01 / UPLOAD</span>
+      </div>
+
+      <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp" hidden>
+      <div id="dropZone" class="drop-zone" role="button" tabindex="0" aria-label="Choose or drop an image">
+        <div id="emptyState" class="empty-state">
+          <div class="upload-icon">📸</div>
+          <h3>Drop your image here</h3>
+          <p>or <button id="browseButton" class="text-button" type="button">browse files</button> from your device</p>
+          <span class="file-hint">JPG, PNG or WEBP · Max 10 MB</span>
+        </div>
+        <div id="previewState" class="preview-state" hidden>
+          <img id="imagePreview" alt="Selected image preview">
+          <div class="preview-overlay"><span>Image ready ✓</span></div>
+          <button id="removeButton" class="remove-button" type="button" aria-label="Remove selected image">×</button>
+        </div>
+      </div>
+
+      <div class="action-row">
+        <span id="fileName" class="file-name">No image selected</span>
+        <button id="predictButton" class="predict-button" type="button" disabled>
+          <span class="button-label">Predict</span><span aria-hidden="true">→</span>
+        </button>
+      </div>
+
+      <div id="message" class="message" role="status" aria-live="polite"></div>
+
+      <section id="resultSection" class="result-section" hidden>
+        <div class="result-topline"><span class="step-pill">02 / RESULT</span><span class="result-sparkle">✦</span></div>
+        <div class="prediction-main">
+          <div id="resultEmoji" class="result-emoji">🐾</div>
+          <div>
+            <p class="result-label">Our best guess is...</p>
+            <h2 id="predictedClass">Dog</h2>
+          </div>
+          <div class="confidence-badge"><strong id="confidenceValue">98.5%</strong><span>confidence</span></div>
+        </div>
+        <div class="probability-list">
+          <div class="probability-heading"><span>Cat</span><strong id="catValue">1.5%</strong></div>
+          <div class="progress-track"><div id="catBar" class="progress-fill cat-fill"></div></div>
+          <div class="probability-heading dog-heading"><span>Dog</span><strong id="dogValue">98.5%</strong></div>
+          <div class="progress-track"><div id="dogBar" class="progress-fill dog-fill"></div></div>
+        </div>
+        <p class="result-footnote">The confidence score is the model's estimated probability, not a guarantee.</p>
+      </section>
+    </section>
+
+    <footer><span>Made with</span> <span class="heart">♥</span> <span>and a little machine learning</span></footer>
+  </main>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
